@@ -82,6 +82,25 @@ define Device/comtrend_vr-3032u
 endef
 TARGET_DEVICES += comtrend_vr-3032u
 
+### Fiberhome ###
+define Device/fiberhome_an5506-04fg
+  $(Device/bcm63xx-nand)
+  DEVICE_VENDOR := Fiberhome
+  DEVICE_MODEL := AN5506-04FG
+  CHIP_ID := 63268
+  SOC := bcm63168
+  CFE_RAM_FILE := fiberhome,an5506-04fg/cferam.000
+  CFE_RAM_JFFS2_NAME := cferam.000
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  SUBPAGESIZE := 512
+  VID_HDR_OFFSET := 2048
+  DEVICE_PACKAGES += $(USB2_PACKAGES)
+  CFE_WFI_VERSION := 0x5732
+  CFE_WFI_FLASH_TYPE := 3
+endef
+TARGET_DEVICES += fiberhome_an5506-04fg
+
 ### Huawei ###
 define Device/huawei_hg253s-v2
   $(Device/bcm63xx-nand)

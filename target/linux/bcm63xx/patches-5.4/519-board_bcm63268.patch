@@ -1,6 +1,8 @@
---- a/arch/mips/bcm63xx/boards/board_bcm963xx.c
-+++ b/arch/mips/bcm63xx/boards/board_bcm963xx.c
-@@ -2711,6 +2711,273 @@ static struct board_info __initdata boar
+Index: linux-5.4.85/arch/mips/bcm63xx/boards/board_bcm963xx.c
+===================================================================
+--- linux-5.4.85.orig/arch/mips/bcm63xx/boards/board_bcm963xx.c
++++ linux-5.4.85/arch/mips/bcm63xx/boards/board_bcm963xx.c
+@@ -2711,6 +2711,308 @@ static struct board_info __initdata boar
  #endif /* CONFIG_BCM63XX_CPU_6368 */
  
  /*
@@ -268,13 +270,48 @@
 +		},
 +	},
 +};
++
++static struct board_info __initdata board_an5506_04fg = {
++	.name = "AN5506-04FG",
++	.expected_cpu_id = 0x63268,
++
++	.has_ohci0 = 1,
++	.has_ehci0 = 1,
++	.num_usbh_ports = 1,
++
++	.has_enetsw = 1,
++	.enetsw = {
++		.used_ports = {
++			[0] = {
++				.used = 1,
++				.phy_id = 1,
++				.name = "LAN2",
++			},
++			[1] = {
++				.used = 1,
++				.phy_id = 2,
++				.name = "LAN3",
++			},
++			[2] = {
++				.used = 1,
++				.phy_id = 3,
++				.name = "LAN4",
++			},
++			[3] = {
++				.used = 1,
++				.phy_id = 4,
++				.name = "LAN1",
++			},
++		},
++	},
++};
 +#endif /* CONFIG_BCM63XX_CPU_63268 */
 +
 +/*
   * all boards
   */
  static const struct board_info __initconst *bcm963xx_boards[] = {
-@@ -2815,6 +3082,15 @@ static const struct board_info __initcon
+@@ -2815,6 +3117,16 @@ static const struct board_info __initcon
  	&board_VR3026e,
  	&board_WAP5813n,
  #endif /* CONFIG_BCM63XX_CPU_6368 */
@@ -286,11 +323,12 @@
 +	&board_VG8050,
 +	&board_VR3032u,
 +	&board_vw6339gu,
++	&board_an5506_04fg,
 +#endif /* CONFIG_BCM63XX_CPU_63268 */
  };
  
  static struct of_device_id const bcm963xx_boards_dt[] = {
-@@ -2932,6 +3208,14 @@ static struct of_device_id const bcm963x
+@@ -2932,6 +3244,15 @@ static struct of_device_id const bcm963x
  	{ .compatible = "zyxel,p870hw-51a-v2", .data = &board_P870HW51A_V2, },
  #endif /* CONFIG_BCM63XX_CPU_6368 */
  #ifdef CONFIG_BCM63XX_CPU_63268
@@ -298,6 +336,7 @@
 +	{ .compatible = "brcm,bcm963269bhr", .data = &board_963269bhr, },
 +	{ .compatible = "comtrend,vg-8050", .data = &board_VG8050, },
 +	{ .compatible = "comtrend,vr-3032u", .data = &board_VR3032u, },
++	{ .compatible = "fiberhome,an5506-04fg", .data = &board_an5506_04fg, },
 +	{ .compatible = "inteno,vg50", .data = &board_vw6339gu, },
 +	{ .compatible = "sercomm,h500-s-lowi", .data = &board_H500s, },
 +	{ .compatible = "sercomm,h500-s-vfes", .data = &board_H500s, },
